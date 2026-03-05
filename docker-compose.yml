@@ -1,0 +1,37 @@
+# Use Case: Basic Installation
+services:
+  # Project URL: https://github.com/n8n-io/n8n
+  # Docs URL: https://docs.n8n.io/
+  n8n:
+    image: n8n-docker:latest
+    container_name: "n8n-grado"
+    restart: always
+    networks: ['demo']
+    environment:
+      # *** General ***
+      - GENERIC_TIMEZONE=Europe/Madrid
+      - TZ=Europe/Madrid
+      - NODE_ENV=production
+      # *** Settings ***
+      - N8N_SECURE_COOKIE=false
+      - N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=true
+      - N8N_RUNNERS_ENABLED=true
+      - NODES_EXCLUDE=[]
+    ports:
+      - 5678:5678
+    group_add:
+      - "998"
+    volumes:
+      # *** General configuration ***
+      - /var/run/docker.sock:/var/run/docker.sock # Access to Docker on host machine
+      # *** Volume configuration ***
+      - ./example01-n8n-data/n8n:/home/node/.n8n
+      - ./example01-n8n-data/other:/home/node/
+
+volumes:
+  example01-n8n-data:
+
+networks:
+  demo:
+    name: demo
+    driver: bridge
