@@ -25,11 +25,11 @@ services:
       # *** General configuration ***
       - /var/run/docker.sock:/var/run/docker.sock # Access to Docker on host machine
       # *** Volume configuration ***
-      - ./example01-n8n-data/n8n:/home/node/.n8n
-      - ./example01-n8n-data/other:/home/node/
+      - n8n-data:/home/node/.n8n
+      - .//shared:/root/.n8n-files
 
 volumes:
-  example01-n8n-data:
+  n8n-data:
 
 networks:
   demo:
