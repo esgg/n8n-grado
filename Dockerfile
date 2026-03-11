@@ -14,4 +14,6 @@ COPY --from=alpine /usr/lib/libapk.so* /usr/lib/
 # Now apk works again
 RUN apk add --no-cache docker-cli
 
+RUN apk add --no-cache python3 py3-pip py3-virtualenv
+
 RUN addgroup -g 116 docker && addgroup node docker
